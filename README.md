@@ -1,11 +1,31 @@
 # MixtComp Docker
 
+
+Build
+
 ```
 sudo docker build -t testmc .
-sudo docker run --rm -t -i -v /home/grimonprez/Documents/MixtComp/MixtComp-Docker/inputinput:/input testmc
-sudo docker run --rm -t -i -v /home/grimonprez/Documents/MixtComp/MixtComp-Docker/inputinput:/input testmc input/data2.csv input/model2.csv input/algo2.json input/param2.json
-sudo docker run --rm -t -i -v /home/grimonprez/Documents/MixtComp/MixtComp-Docker/inputinput:/input testmc input/data.csv input/model.csv input/algo.json input/param2.json input/resLearn.RData
 ```
+
+Learn with default files.
+
+```
+sudo docker run --rm -t -i -v /home/grimonprez/Documents/MixtComp/MixtComp-Docker/input:/input testmc
+```
+
+Predict with the learnt model
+```
+sudo docker run --rm -t -i -v /home/grimonprez/Documents/MixtComp/MixtComp-Docker/input:/input testmc input/mixtcomp-example.csv input/model.csv input/algo.json input/paramPredict.json input/resLearn.RData
+```
+
+Learn with different files
+
+```
+sudo docker run --rm -t -i -v /home/grimonprez/Documents/MixtComp/MixtComp-Docker/input:/input testmc input/data2.csv input/model2.csv input/algo2.json input/param.json
+```
+
+
+
 
 
 ## Learn mode

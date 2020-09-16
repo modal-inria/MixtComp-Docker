@@ -1,4 +1,4 @@
-https://hub.docker.com/r/rocker/r-ver
+# https://hub.docker.com/r/rocker/r-ver
 FROM rocker/r-ver
 
 RUN Rscript -e "install.packages(c('RMixtComp'));"
@@ -12,4 +12,4 @@ COPY input input
 COPY script.R .
 
 ENTRYPOINT ["Rscript", "script.R"]
-CMD ["input/data.csv", "input/model.csv", "input/algo.json", "input/param.json"]
+CMD ["input/mixtcomp-example.csv", "input/model.csv", "input/algo.json", "input/param.json"]
