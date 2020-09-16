@@ -1,15 +1,10 @@
-## https://hub.docker.com/_/r-base
-FROM r-base:latest
+https://hub.docker.com/r/rocker/r-ver
+FROM rocker/r-ver
 
-## Install RMixtComp and its dependencies
-RUN apt update && apt install  -y --no-install-recommends \
-  libcurl4-openssl-dev \
-  libssl-dev
-
-RUN Rscript -e "install.packages(c('RMixtComp'), repos='http://cran.rstudio.com/');"
+RUN Rscript -e "install.packages(c('RMixtComp'));"
 
 ## package for reading param file
-RUN Rscript -e "install.packages(c('jsonlite'), repos='http://cran.rstudio.com/');"
+RUN Rscript -e "install.packages(c('jsonlite'));"
 
 ## input is the folder containing the data
 COPY input input
