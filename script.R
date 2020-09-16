@@ -67,7 +67,18 @@ data <- read.table(dataFile, sep = ";", header = TRUE)
 model <- read.table(modelFile, sep = ";", header = TRUE)
 
 
-
+## temporary correction: to remove when RMixtCompUtilities 4.1.3 will be on CRAN
+if(("matrix" %in% class(model)) || ("data.frame" %in% class(model)))
+{
+  model = apply(model, 2, function(x) {
+    out <- list(type = as.character(x[1]))
+    if(length(x) >= 2)
+      out$paramStr = as.character(x[2])
+    
+    out
+  })
+}
+##
 
 
 

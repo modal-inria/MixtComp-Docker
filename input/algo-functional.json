@@ -3,7 +3,7 @@
   "nbIter": 100,
   "nbGibbsBurnInIter": 50,
   "nbGibbsIter": 100,
-  "nInitPerClass": 100,
+  "nInitPerClass": 10,
   "nSemTry": 10,
   "confidenceLevel": 0.95,
   "ratioStableCriterion": 0.99,
