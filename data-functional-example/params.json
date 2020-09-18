@@ -1,0 +1,6 @@
+{
+  "nClass": [2, 3, 4],
+  "criterion": "BIC",
+  "nRun": 5,
+  "nCore": 5
+}
