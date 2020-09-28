@@ -1,15 +1,13 @@
 # https://hub.docker.com/r/rocker/r-ver
-FROM rocker/r-ver
+FROM rocker/r-ver:4.0.2
 
 RUN Rscript -e "install.packages(c('RMixtComp'));"
 
 ## package for reading param file
 RUN Rscript -e "install.packages(c('jsonlite'));"
 
-## input is the folder containing the data
-COPY input input
-
+WORKDIR /home/docker
 COPY script.R .
 
 ENTRYPOINT ["Rscript", "script.R"]
-CMD ["input/mixtcomp-example.csv", "input/model.csv", "input/algo.json", "input/param.json"]
+CMD ["data/data.csv", "data/model.csv", "data/algo.json", "data/params.json"]
