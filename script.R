@@ -88,7 +88,7 @@ if(mode == "learn")
   resLearn <- mixtCompLearn(data, model, algo, nClass = param$nClass, criterion = param$criterion, nRun = param$nRun,
                             nCore = param$nCore, verbose = TRUE)
 
-  save(resLearn, file = "input/resLearn.RData")
+  save(resLearn, file = "data/resLearn.RData")
 }else{
 
   load(resFile)
@@ -97,7 +97,7 @@ if(mode == "learn")
   resPredict <- mixtCompPredict(data, model, algo, resLearn, nClass = param$nClass, nRun = param$nRun,
                                 nCore = param$nCore, verbose = TRUE)
 
-  save(resPredict, file = "input/resPredict.RData")
+  save(resPredict, file = "data/resPredict.RData")
 }
 
 
