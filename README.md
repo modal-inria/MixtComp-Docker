@@ -1,30 +1,22 @@
 # MixtComp Docker
 
-
 Build
 
 ```
-sudo docker build -t testmc .
+sudo docker build -t mixtcomp/docker .
 ```
 
-Learn with default files (*input/data.csv*, *input/model.csv*, *input/algo.json*, *input/param.json*)
+Learn with default files (*data.csv*, *model.csv*, *algo.json*, *param.json*)
 
 ```
-sudo docker run --rm -t -i -v /home/grimonprez/Documents/MixtComp/MixtComp-Docker/input:/input testmc
+sudo docker run --rm  -v <data_directory>:/home/docker/data mixtcomp/docker
 ```
 
 Predict with the learnt model
 
 ```
-sudo docker run --rm -t -i -v /home/grimonprez/Documents/MixtComp/MixtComp-Docker/input:/input testmc input/mixtcomp-example.csv input/model.csv input/algo.json input/paramPredict.json input/resLearn.RData
+sudo docker run --rm -v <data_directory>:/home/docker/data mixtcomp/docker data/data.csv data/model.csv data/algo.json data/param.json data/resLearn.RData
 ```
-
-Learn with different files
-
-```
-sudo docker run --rm -t -i -v /home/grimonprez/Documents/MixtComp/MixtComp-Docker/input:/input testmc input/mixtcomp-functional-example.csv input/model-functional.csv input/algo-functional.json input/param.json
-```
-
 
 ## Learn mode
 
@@ -32,11 +24,10 @@ sudo docker run --rm -t -i -v /home/grimonprez/Documents/MixtComp/MixtComp-Docke
 
 - data csv file with semicolon (;) as separator and the first line as column names
 - model csv file with semicolon (;) as separator and the first line as column names
-- algo json file containing the SEM algorithm's parameters (see associated documentation in *RMixtComp* or *input/algo.json* file)
-- param json file containing the mixtCompLearn/mixtCompredict function parameters (see associated documentation in *RMixtComp* or *input/param.json* file)
+- algo json file containing the SEM algorithm's parameters (see associated documentation in *RMixtComp* or *data[-functional]-example/algo.json* file)
+- param json file containing the mixtCompLearn/mixtCompredict function parameters (see associated documentation in *RMixtComp* or *data[-functional]-example/param.json* file)
 
-The output is saved in *input/resLearn.RData*.
-
+The output is saved in *<data_directory>/resLearn.RData*.
 
 ## Predict mode
 
@@ -45,5 +36,4 @@ The output is saved in *input/resLearn.RData*.
 - same 4 first files as learn mode
 - res containing the learnt model (".RData" file with a saved MixtComp object named *res*)
 
-
-The output is saved in *input/resPredict.RData*.
+The output is saved in *<data_directory>/resPredict.RData*.
