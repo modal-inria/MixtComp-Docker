@@ -1,37 +1,33 @@
 library(RMixtComp)
 library(jsonlite)
 
-
 ## read provided parameters
 
-args <- commandArgs(trailingOnly = TRUE)
+args <- R.utils::commandArgs(asValues = TRUE, defaults = list(data = "data/data.csv",
+                                                              model = "data/model.csv",
+                                                              algo = "data/algo.json",
+                                                              param = "data/params.json"))
 
 
-dataFile <- args[1]
-modelFile <- args[2]
+dataFile <- args$data
+modelFile <- args$model
+algoFile <- args$algo
+paramFile <- args$param
 
 cat("Data file:", dataFile, "\n")
 cat("Model file:", modelFile, "\n")
+cat("Algo file:", algoFile, "\n")
+cat("Param file:", paramFile, "\n")
+
 
 mode <- "learn"
-
-if(length(args) >= 3)
+if(!is.null(args$resLearn))
 {
-  algoFile <- args[3]
-  cat("Algo file:", algoFile, "\n")
-}
-if(length(args) >= 4)
-{
-  paramFile <- args[4]
-  cat("Param file:", paramFile, "\n")
-}
-if(length(args) == 5)
-{
-  resFile <- args[5]
+  resFile <- args$resLearn
   mode = ifelse(file.exists(resFile), "predict", "learn")
   cat("Learnt model file:", resFile, "\n")
-}
   
+}
 
 
 ## check mandatory files
@@ -87,16 +83,16 @@ if(mode == "learn")
 {
   resLearn <- mixtCompLearn(data, model, algo, nClass = param$nClass, criterion = param$criterion, nRun = param$nRun,
                             nCore = param$nCore, verbose = TRUE)
-
+  
   save(resLearn, file = "data/resLearn.RData")
 }else{
-
+  
   load(resFile)
-
-
+  
+  
   resPredict <- mixtCompPredict(data, model, algo, resLearn, nClass = param$nClass, nRun = param$nRun,
                                 nCore = param$nCore, verbose = TRUE)
-
+  
   save(resPredict, file = "data/resPredict.RData")
 }
 
